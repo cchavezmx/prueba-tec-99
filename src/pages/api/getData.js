@@ -11,7 +11,5 @@ export default async function handler (req, res) {
   const data = await fetch(url)
     .then(res => res.json())
     .then(json => json.slice(0, Number(limit)))
-
-  console.log(data.length)
   return res.status(200).json({ launches: data })
 }

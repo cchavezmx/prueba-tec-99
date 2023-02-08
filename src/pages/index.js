@@ -1,12 +1,17 @@
-import MissionCard from '@/components/MissionCard'
+/* eslint-disable camelcase */
 import Head from 'next/head'
 import useGetData from '@/hooks/useGetdata'
+import { Box, Typography } from '@mui/material'
+import ListCards from '@/components/ListCards'
+import LaunchesCard from '@/components/LaunchesCard'
+import SelectorMission from '@/components/SelectorMission'
 // api interna
 // Cliente / Front
 // Servidor / NODEJS
 
 export default function Home () {
-  const { data: launches, loading } = useGetData({ url: '/api/getData?limit=100' })
+  const { data: launches, loading } = useGetData({ url: '/api/getData?limit=200' })
+  // contato es el payload o la data que se va a pasar al componete LaunchesCard
 
   return (
     <>
@@ -17,29 +22,33 @@ export default function Home () {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Bienvenidos a next13</h1>
-        {/* <MissionCard
-          mission_name={data.mission_name}
-          links={data.links}
-          launch_site={data.launch_site}
-
-        /> */}
-        {
-          !loading && launches.map(data => {
-            return (
-              <MissionCard
-                key={data.flight_number}
-                mission_name={data.mission_name}
-                links={data.links}
-                launch_site={data.launch_site}
-            />
-            )
-          })
-        }
-        {
-          loading && <h4>Cargando...</h4>
-        }
-      </main>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          width: '100%',
+          '@media (min-width: 780px)': {
+            width: '80%',
+            flexDirection: 'row'
+          }
+        }}>
+        <Box
+          className='hidden'
+          sx={{
+            flexBasis: '40%',
+            display: 'flex',
+            border: '1px solid #eaeaea'
+          }}>
+            {/* list cards es el componente de vista principal para seleeccionar un vuelo */}
+            { !loading && <ListCards launches={launches} />}
+            { loading && <Typography variant="h4">Loading...</Typography>}
+        </Box>
+        {/* autoComplete de material UI */}
+        <SelectorMission data={launches}/>
+        {/* tarjeta donde se renderiza los vuelos */}
+        <LaunchesCard />
+        </Box>
+        </main>
     </>
   )
 }
