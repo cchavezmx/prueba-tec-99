@@ -13,8 +13,12 @@ export default function ListCards ({ launches }) {
         overflow: 'auto',
         width: '100%',
         maxHeight: '70vh',
+        display: 'none',
         '& ul': { padding: 0 },
-        alignContent: 'stretch'
+        alignContent: 'stretch',
+        '@media (min-width: 780px)': {
+          display: 'flex'
+        }
       }}
       subheader={<li />}
     >
