@@ -9,6 +9,10 @@ export default function SelectorMission () {
   const launches = allMissions.map(item => item.mission_name)
   // find, filter en este caso de uso es mejor el find
   const handledSetName = (e, newValue) => {
+    if (newValue === null) {
+      return ''
+    }
+    console.log('🚀 ~ file: SelectorMission.jsx:12 ~ handledSetName ~ newValue', newValue)
     const current = allMissions.find((elemento) => elemento.mission_name === newValue)
     setMissionStore(current)
   }
