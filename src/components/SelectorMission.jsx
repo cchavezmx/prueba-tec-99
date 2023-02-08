@@ -25,7 +25,6 @@ export default function SelectorMission () {
           : (
             <Autocomplete
                 fullWidth
-                disablePortal
                 id="combo-box-demo"
                 options={launches}
                 renderInput={(params) => <TextField {...params} label="Lanzamientos" />}
