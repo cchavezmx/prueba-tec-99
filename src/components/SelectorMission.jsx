@@ -12,7 +12,6 @@ export default function SelectorMission () {
     if (newValue === null) {
       return ''
     }
-    console.log('🚀 ~ file: SelectorMission.jsx:12 ~ handledSetName ~ newValue', newValue)
     const current = allMissions.find((elemento) => elemento.mission_name === newValue)
     setMissionStore(current)
   }
